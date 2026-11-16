@@ -8,9 +8,9 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP D";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.indigo),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.teal),
-    ItemHomepage("Logout", Icons.logout, Colors.redAccent),
+    ItemHomepage("Lihat Proyek", Icons.folder, const Color(0xFF6366F1)),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, const Color(0xFF10B981)),
+    ItemHomepage("Logout", Icons.logout, const Color(0xFFF43F5E)),
   ];
 
     @override
@@ -26,7 +26,7 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: const Color(0xFF0C0E1A),
       ),
       // Body halaman utama dengan padding di sekelilingnya.
       body: Padding(
@@ -142,7 +142,20 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(
+                content: Row(
+                  children: [
+                    Icon(item.icon, color:Colors.white),
+                    const SizedBox(width: 10),
+                    Text("Kamu telah menekan tombol ${item.name}!"),
+                  ],
+                ),
+                backgroundColor: item.color,
+                behavior: SnackBarBehavior.floating,
+                shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+                duration: const Duration(seconds: 2),
+                action: SnackBarAction(label: "Tutup", textColor: Colors.white, onPressed: () {},),
+              ),
             );
         },
         child: Container(
