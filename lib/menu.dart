@@ -136,6 +136,9 @@ class ItemCard extends StatelessWidget {
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        splashColor: Colors.white.withValues(alpha: 0.3),
+        highlightColor: Colors.white.withValues(alpha: 0.3),
         // Aksi ketika kartu ditekan oleh pengguna.
         onTap: () {
           // Menampilkan SnackBar dengan pesan interaktif.
@@ -147,14 +150,15 @@ class ItemCard extends StatelessWidget {
                   children: [
                     Icon(item.icon, color:Colors.white),
                     const SizedBox(width: 10),
-                    Text("Kamu telah menekan tombol ${item.name}!"),
+                    Expanded(child: Text("Kamu telah menekan tombol ${item.name}!")),
                   ],
                 ),
                 backgroundColor: item.color,
-                behavior: SnackBarBehavior.floating,
-                shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+                behavior: SnackBarBehavior.fixed,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                ),
                 duration: const Duration(seconds: 2),
-                action: SnackBarAction(label: "Tutup", textColor: Colors.white, onPressed: () {},),
               ),
             );
         },
