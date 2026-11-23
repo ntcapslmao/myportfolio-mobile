@@ -1,5 +1,7 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:myportfolio_mobile/screens/creative_project_form.dart';
 import 'package:myportfolio_mobile/screens/education_form.dart';
+import 'package:myportfolio_mobile/screens/experience_form.dart';
 import 'package:myportfolio_mobile/screens/menu.dart';
 import 'package:myportfolio_mobile/screens/project_form.dart';
 
@@ -30,7 +32,7 @@ class LeftDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Explore personal projects and experiences!',
+                    'Created by Ghazi Alfisyahri, a.k.a. ntcapslmao/ntcaps. Explore my personal portfolio!',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -75,6 +77,32 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const EducationFormPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.work_outline),
+            title: const Text('Add Experience'),
+            // Navigasi ke halaman tambah pengalaman
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ExperienceFormPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.photo_library_outlined),
+            title: const Text('Add Creative Project'),
+            // Navigasi ke halaman tambah karya kreatif
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CreativeProjectFormPage(),
                 ),
               );
             },
