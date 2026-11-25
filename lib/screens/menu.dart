@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportfolio_mobile/widgets/left_drawer.dart';
 import 'package:myportfolio_mobile/widgets/project_card.dart';
 
@@ -12,9 +12,17 @@ class MyHomePage extends StatelessWidget {
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder, const Color(0xFF6366F1)),
     ItemHomepage("Tambah Proyek", Icons.add_circle, const Color(0xFF10B981)),
-    ItemHomepage("Tambah Riwayat Pendidikan", Icons.school, const Color(0xFF818CF8)),
+    ItemHomepage(
+      "Tambah Riwayat Pendidikan",
+      Icons.school,
+      const Color(0xFF818CF8),
+    ),
     ItemHomepage("Tambah Pengalaman", Icons.work, const Color(0xFFC084FC)),
-    ItemHomepage("Tambah Creative Project", Icons.photo_library, const Color(0xFF0EA5E9)),
+    ItemHomepage(
+      "Tambah Creative Project",
+      Icons.photo_library,
+      const Color(0xFF0EA5E9),
+    ),
     ItemHomepage("Logout", Icons.logout, const Color(0xFFF43F5E)),
   ];
 
@@ -42,11 +50,17 @@ class MyHomePage extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: InfoCard(title: 'NPM', content: npm)),
+                Expanded(
+                  child: InfoCard(title: 'NPM', content: npm),
+                ),
                 const SizedBox(width: 8.0),
-                Expanded(child: InfoCard(title: 'Name', content: nama)),
+                Expanded(
+                  child: InfoCard(title: 'Name', content: nama),
+                ),
                 const SizedBox(width: 8.0),
-                Expanded(child: InfoCard(title: 'Class', content: kelas)),
+                Expanded(
+                  child: InfoCard(title: 'Class', content: kelas),
+                ),
               ],
             ),
 

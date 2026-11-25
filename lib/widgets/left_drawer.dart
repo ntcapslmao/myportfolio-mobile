@@ -1,22 +1,27 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportfolio_mobile/screens/creative_project_form.dart';
 import 'package:myportfolio_mobile/screens/education_form.dart';
 import 'package:myportfolio_mobile/screens/experience_form.dart';
+import 'package:myportfolio_mobile/screens/login_screen.dart';
 import 'package:myportfolio_mobile/screens/menu.dart';
 import 'package:myportfolio_mobile/screens/project_form.dart';
+import 'package:myportfolio_mobile/screens/project_list_screen.dart';
+import 'package:myportfolio_mobile/services/auth_state.dart';
+import 'package:myportfolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isLoggedIn = context.watch<AuthState>().isLoggedIn;
+
     return Drawer(
       child: ListView(
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Color(0xFF0C0E1A),
-            ),
+            decoration: BoxDecoration(color: Color(0xFF0C0E1A)),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -33,10 +38,7 @@ class LeftDrawer extends StatelessWidget {
                   SizedBox(height: 8),
                   Text(
                     'Created by Ghazi Alfisyahri, a.k.a. ntcapslmao/ntcaps. Explore my personal portfolio!',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ],
               ),
@@ -45,12 +47,21 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
-            // Navigasi ke halaman utama portofolio
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.folder_outlined),
+            title: const Text('Projects'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
+                  builder: (context) => const ProjectListScreen(),
                 ),
               );
             },
@@ -58,8 +69,9 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
             title: const Text('Add Project'),
-            // Navigasi ke halaman tambah proyek
-            onTap: () {
+            onTap: () async {
+              final ok = await ensureLoggedIn(context);
+              if (!ok || !context.mounted) return;
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -71,7 +83,6 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.school_outlined),
             title: const Text('Add Education'),
-            // Navigasi ke halaman tambah edukasi
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -84,7 +95,6 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.work_outline),
             title: const Text('Add Experience'),
-            // Navigasi ke halaman tambah pengalaman
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -97,7 +107,6 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.photo_library_outlined),
             title: const Text('Add Creative Project'),
-            // Navigasi ke halaman tambah karya kreatif
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -107,6 +116,28 @@ class LeftDrawer extends StatelessWidget {
               );
             },
           ),
+          const Divider(),
+          if (!isLoggedIn)
+            ListTile(
+              leading: const Icon(Icons.login),
+              title: const Text('Login'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+            )
+          else
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () async {
+                Navigator.pop(context);
+                await context.read<AuthState>().logout();
+              },
+            ),
         ],
       ),
     );

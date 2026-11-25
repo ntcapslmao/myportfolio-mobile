@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportfolio_mobile/widgets/left_drawer.dart';
 
 /// Halaman formulir untuk menambahkan riwayat edukasi portofolio.
