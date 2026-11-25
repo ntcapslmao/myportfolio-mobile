@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportfolio_mobile/models/project.dart';
 import 'package:myportfolio_mobile/screens/project_detail_screen.dart';
 import 'package:myportfolio_mobile/services/api_client.dart';
